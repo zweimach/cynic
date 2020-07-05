@@ -12,6 +12,7 @@ m_dep = cc.find_library('m', required : false)
 
 cynic_lib = library('cynic',
     sources: [
+        'src/lexer.c',
         'src/token.c',
     ],
     dependencies: [
