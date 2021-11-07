@@ -1,7 +1,9 @@
-#ifndef APA_TOKEN_H
-#define APA_TOKEN_H
+#ifndef CYNIC_TOKEN_H
+#define CYNIC_TOKEN_H
 
-enum token_type {
+typedef enum TokenType TokenType;
+
+enum TokenType {
     /* Specials */
     T_ILLEGAL,
     T_EOF,
@@ -24,15 +26,17 @@ enum token_type {
     T_LET,
 };
 
-struct token {
-    enum token_type type;
-    char *value;
+typedef struct Token Token;
+
+struct Token {
+    TokenType type;
+    char* value;
 };
 
-struct token *token_new(enum token_type type, char const *const ch);
+Token* token_new(TokenType type, char const* const ch);
 
-void token_free(struct token *token);
+void token_free(Token* token);
 
-char const *const token_type(enum token_type t);
+char const* const token_type(TokenType t);
 
-#endif /* APA_TOKEN_H */
+#endif /* CYNIC_TOKEN_H */

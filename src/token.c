@@ -3,9 +3,9 @@
 
 #include "token.h"
 
-struct token *token_new(enum token_type type, char const *const ch)
+Token* token_new(TokenType type, char const* const ch)
 {
-    struct token *token = calloc(1, sizeof(struct token));
+    Token* token = calloc(1, sizeof(Token));
     if (token) {
         token->type = type;
         token->value = calloc(strlen(ch) + 1, sizeof(char));
@@ -16,13 +16,13 @@ struct token *token_new(enum token_type type, char const *const ch)
     return token;
 }
 
-void token_free(struct token *token)
+void token_free(Token* token)
 {
     free(token->value);
     free(token);
 }
 
-char const *const token_type(enum token_type t)
+char const* const token_type(TokenType t)
 {
     switch (t) {
     case T_ILLEGAL:

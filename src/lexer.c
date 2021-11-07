@@ -4,9 +4,9 @@
 #include "lexer.h"
 #include "token.h"
 
-struct lexer *lexer_new(char const *const input)
+Lexer* lexer_new(char const* const input)
 {
-    struct lexer *lexer = calloc(1, sizeof(struct lexer));
+    Lexer* lexer = calloc(1, sizeof(Lexer));
     if (lexer) {
         lexer->input = calloc(strlen(input) + 1, sizeof(char));
     }
@@ -16,7 +16,7 @@ struct lexer *lexer_new(char const *const input)
     return lexer;
 }
 
-void lexer_free(struct lexer *lexer)
+void lexer_free(Lexer* lexer)
 {
     for (unsigned i = 0; i < lexer->token_count; i++) {
         token_free(lexer->token_list[i]);
@@ -26,7 +26,7 @@ void lexer_free(struct lexer *lexer)
     free(lexer);
 }
 
-void lexer_read_char(struct lexer *lexer)
+void lexer_read_char(Lexer* lexer)
 {
     if (lexer->read_position >= strlen(lexer->input)) {
         lexer->ch = 0;
@@ -37,11 +37,10 @@ void lexer_read_char(struct lexer *lexer)
     lexer->read_position += 1;
 }
 
-void lexer_add_token(struct lexer *lexer, struct token *token)
+void lexer_add_token(Lexer* lexer, Token* token)
 {
-    struct token **token_list =
-        realloc(lexer->token_list,
-                sizeof(struct token *) * (lexer->token_count + 1));
+    Token** token_list =
+        realloc(lexer->token_list, sizeof(Token*) * (lexer->token_count + 1));
     if (token_list) {
         lexer->token_list = token_list;
         lexer->token_list[lexer->token_count] = token;
@@ -51,9 +50,9 @@ void lexer_add_token(struct lexer *lexer, struct token *token)
 
 #define TERM_STR(x) ((char[]){x, 0})
 
-struct token *lexer_next_token(struct lexer *lexer)
+Token* lexer_next_token(Lexer* lexer)
 {
-    struct token *token = NULL;
+    Token* token = NULL;
     lexer_read_char(lexer);
     switch (lexer->ch) {
     case '=':

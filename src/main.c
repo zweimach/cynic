@@ -4,10 +4,10 @@
 #include "lexer.h"
 #include "token.h"
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
-    char const *const input = "=+(){},;";
-    struct token tests[] = {
+    char const* const input = "=+(){},;";
+    Token tests[] = {
         {T_ASSIGN, "="},
         {T_PLUS, "+"},
         {T_LPAREN, "("},
@@ -18,12 +18,14 @@ int main(int argc, char **argv)
         {T_SEMICOLON, ";"},
         {T_EOF, ""},
     };
-    struct lexer *lexer = lexer_new(input);
+
+    Lexer* lexer = lexer_new(input);
 
     for (unsigned i = 0; i <= strlen(input); i++) {
-        struct token *token = lexer_next_token(lexer);
+        Token* token = lexer_next_token(lexer);
         printf("%s %s\n", token_type(token->type), token_type(tests[i].type));
         printf("%s %s\n", token->value, tests[i].value);
     }
+
     lexer_free(lexer);
 }

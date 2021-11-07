@@ -9,12 +9,12 @@
 #include "lexer.h"
 #include "token.h"
 
-static void lexer_test(void **state)
+static void lexer_test(void** state)
 {
     (void)state;
 
-    char const *const input = "=+(){},;";
-    struct token tests[] = {
+    char const* const input = "=+(){},;";
+    Token tests[] = {
         {T_ASSIGN, "="},
         {T_PLUS, "+"},
         {T_LPAREN, "("},
@@ -25,10 +25,10 @@ static void lexer_test(void **state)
         {T_SEMICOLON, ";"},
         {T_EOF, ""},
     };
-    struct lexer *lexer = lexer_new(input);
+    Lexer* lexer = lexer_new(input);
 
     for (unsigned i = 0; i <= strlen(input); i++) {
-        struct token *token = lexer_next_token(lexer);
+        Token* token = lexer_next_token(lexer);
         assert_string_equal(token_type(token->type), token_type(tests[i].type));
         assert_string_equal(token->value, tests[i].value);
     }
