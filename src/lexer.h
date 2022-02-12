@@ -1,26 +1,29 @@
 #ifndef CYNIC_LEXER_H
 #define CYNIC_LEXER_H
 
+#include <stdint.h>
+
 #include "token.h"
+#include "types.h"
 
 typedef struct Lexer Lexer;
 
 struct Lexer {
-    char* input;
-    unsigned position;
-    unsigned read_position;
-    char ch;
+    Char ch;
+    UInt32 position;
+    UInt32 read_position;
+    UInt32 token_count;
     Token** token_list;
-    unsigned token_count;
+    Char* input;
 };
 
-Lexer* lexer_new(char const* const input);
+Lexer* lexer_new(Char const* const input);
 
-void lexer_free(Lexer* lexer);
+Void lexer_free(Lexer* lexer);
 
-void lexer_read_char(Lexer* lexer);
+Void lexer_read_char(Lexer* lexer);
 
-void lexer_add_token(Lexer* lexer, Token* token);
+Void lexer_add_token(Lexer* lexer, Token* token);
 
 Token* lexer_next_token(Lexer* lexer);
 

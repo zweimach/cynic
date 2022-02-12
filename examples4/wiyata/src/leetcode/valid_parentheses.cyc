@@ -1,0 +1,38 @@
+use cynic/prelude::*
+use skeptic/prelude::*
+use skeptic/data::*
+use skeptic/mem::{Allocator, AllocError}
+use skeptic/testing
+use skeptic/testing/assert
+
+[[test]]
+fun testIsValid() AllocError!Unit
+    implicit Allocator = testing::allocator
+
+    "{}[]()"
+        |> isValid(_&_, _).?
+        |> assert::isTrue(_)
+
+    ")(}{]["
+        |> isValid(_&_, _).?
+        |> assert::isFalse(_)
+
+fun isValid(allocator: Allocator, xs: String) AllocError!Bool
+    implicit Allocator = allocator
+
+    const f = \c ->
+        switch c
+            '}' => '{'
+            ']' => '['
+            ')' => '('
+            _ => '\0'
+
+    var s = Stack[Char]::new(_&_).?
+    defer s->delete
+
+    for const c <- xs->iter
+        switch s->last
+            Just{n} if n.* == f(c.*) => s->pop
+            Nothing => s->push(c.*).?
+
+    s->isEmpty |> Ok

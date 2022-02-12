@@ -1,0 +1,12 @@
+use @/prim/num::{Unsigned}
+use @/prim/ref::{Deref}
+
+[[derive(Deref)]]
+[[internal]]
+pub abstract CRef
+
+[[internal]]
+pub abstract CArray[T, $N] with $N: Unsigned = 0
+
+[[internal]]
+pub abstract Void

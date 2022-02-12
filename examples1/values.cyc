@@ -1,0 +1,36 @@
+use skeptic/prelude;
+use skeptic/debug::{assert, print};
+use skeptic/error::{AnyError}
+
+Unit main() {
+    // integers
+    Int32 const onePlusOne = 1 + 1
+    print("1 + 1 = {}\n", onePlusOne)
+
+    // floats
+    Float32 const sevenDivThree = 7.0 / 3.0;
+    print("7.0 / 3.0 = {}\n", sevenDivThree);
+
+    // boolean
+    print("{}\n{}\n{}\n", True && False, True || False, !True);
+
+    // optional
+    Maybe<String> optionalValue = Nothing;
+    assert(optionalValue == Nothing);
+
+    print("\noptional 1\ntype: {s}\nvalue: {s}\n", typeOf(optionalValue), optionalValue);
+
+    optionalValue = Just("hi");
+    assert(optionalValue != Nothing);
+
+    print("\noptional 2\ntype: {s}\nvalue: {s}\n", typeOf(optionalValue), optionalValue);
+
+    // error union
+    Result<AnyError, Int32> numberOrError = AnyError::ArgNotFound;
+
+    print("\nerror union 1\ntype: {s}\nvalue: {s}\n", typeOf(numberOrError), numberOrError);
+
+    numberOrError = Ok(1234);
+
+    print("\nerror union 2\ntype: {s}\nvalue: {s}\n", typeOf(numberOrError), numberOrError);
+}

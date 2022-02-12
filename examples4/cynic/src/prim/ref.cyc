@@ -1,0 +1,15 @@
+[[internal]]
+pub class Deref[T]
+
+[[internal]]
+pub class Try[T]
+
+[[derive(Deref)]]
+[[internal]]
+pub abstract Ref[T]
+
+[[internal]]
+pub abstract Unit
+
+[[internal]]
+pub abstract Never

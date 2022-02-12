@@ -1,0 +1,14 @@
+module Package exposing (package)
+
+import Cynic.Package exposing (Package)
+
+package : Package
+package =
+    Package.Library
+        { name = "Wiyata"
+        , author = "Ananda Umamil <zweimach@zweimach.org>"
+        , sourceDir = "src"
+        , modules =
+            [ "LeetCode.ValidParentheses"
+            ]
+        }

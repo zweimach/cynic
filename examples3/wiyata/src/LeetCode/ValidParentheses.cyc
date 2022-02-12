@@ -1,0 +1,56 @@
+module LeetCode.ValidParentheses exposing (..)
+
+import Cynic.Prelude exposing (..)
+import Cynic.Effect as Effect
+import Skeptic.Prelude exposing (..)
+import Skeptic.Data.Array as Array
+import Skeptic.Data.String as String
+import Skeptic.Memory.Allocator as Allocator exposing (AllocError, pageAllocator)
+
+isValid : String -> Effect (Result AllocError Bool)
+isValid xs =
+    let f c =
+            case c of
+                '}' -> '{'
+                '}' -> '{'
+                ')' -> '('
+                _ -> '\0'
+        g acc curr =
+            case Array.last acc of
+                Just c if *c == f curr ->
+                    let (s, _) = Array.pop acc
+                    in s
+                _ -> Array.push curr acc
+    in Allocator.alloc pageAllocator
+        |> Effect.andThen (\r ->
+            case r of
+                Ok m ->
+                    let acc = Array.init m
+                    in Effect.defer (\_ -> Array.deinit acc)
+                        |> Effect.andThen (\_ ->
+                            Effect.pure <| Array.isEmpty <| Array.foldl g acc <| String.toArray xs
+                        )
+                e -> Effect.pure e
+        )
+
+isValid' : String -> Effect (Result AllocError Bool)
+isValid' xs = do
+    let f c =
+            case c of
+                '}' -> '{'
+                '}' -> '{'
+                ')' -> '('
+                _ -> '\0'
+        g acc curr =
+            case Array.last acc of
+                Just c if *c == f curr ->
+                    let (s, _) = Array.pop acc
+                    in s
+                _ -> Array.push curr acc
+    r <- Allocator.alloc pageAllocator
+    case r of
+        Ok m -> do
+            let acc = Array.init m
+            Effect.defer (\_ -> Array.deinit acc)
+            Effect.pure <| Array.isEmpty <| Array.foldl g acc <| String.toArray xs
+        e -> Effect.pure e

@@ -1,0 +1,25 @@
+use skeptic::prelude::*;
+use skeptic::mem::pageAllocator;
+
+implicit pageAllocator;
+
+pub Result[AllocError, Bool] isValid(String xs) {
+    var s = Stack[Char]::new().?;
+    defer s.delete();
+    for var c : xs {
+        switch s.last() {
+            Just {n} if n == f(*c) => s.pop(),
+            Nothing => s.push(*c).?,
+        }
+    }
+    return s.isEmpty();
+}
+
+Char f(Char c) {
+    return switch c {
+        '}' => '{',
+        ']' => '[',
+        ')' => '(',
+        _ => '\0',
+    };
+}

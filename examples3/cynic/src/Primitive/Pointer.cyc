@@ -1,0 +1,4 @@
+module Primitive.Pointer exposing (..)
+
+#[internal]
+typedef Ref a

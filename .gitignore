@@ -1,2 +1,2 @@
-third-party/**/
-build/
+/third-party/**/
+/build/

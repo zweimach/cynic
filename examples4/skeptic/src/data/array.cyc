@@ -1,0 +1,11 @@
+pub struct Slice[T] {
+    pub USize length,
+    pub T* data,
+}
+
+pub abstract Array[T]: Slice[T] {
+    pub Self new(Allocator* allocator, USize length) {
+        T* data = allocator.alloc(sizeOf(T) * length);
+        return Self { .length = length, .data = data };
+    }
+}

@@ -1,0 +1,21 @@
+use @/prelude::*;
+
+[[internal]]
+pub class BitAnd[T] {
+    T bitAnd(*self, T* other);
+}
+
+[[internal]]
+pub class BitOr[T] {
+    T bitOr(*self, T* other);
+}
+
+[[internal]]
+pub class BitXor[T] {
+    T bitXor(*self, T* other);
+}
+
+[[internal]]
+pub class BitNot[T] {
+    T bitNot(*self, T* other);
+}

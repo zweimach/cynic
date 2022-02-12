@@ -1,0 +1,45 @@
+use @/prim/num::{Numeral, Fractional, Integral, Unsigned, Signed}
+
+[[derive(Numeral, Integral, Signed)]]
+[[internal]]
+pub typedef IChar
+
+[[derive(Numeral, Integral, Signed)]]
+[[internal]]
+pub typedef IShort
+
+[[derive(Numeral, Integral, Signed)]]
+[[internal]]
+pub typedef ILong
+
+[[derive(Numeral, Integral, Signed)]]
+[[internal]]
+pub typedef ILongLong
+
+[[derive(Numeral, Integral, Unsigned)]]
+[[internal]]
+pub typedef UChar
+
+[[derive(Numeral, Integral, Unsigned)]]
+[[internal]]
+pub typedef UShort
+
+[[derive(Numeral, Integral, Unsigned)]]
+[[internal]]
+pub typedef ULong
+
+[[derive(Numeral, Integral, Unsigned)]]
+[[internal]]
+pub typedef ULongLong
+
+[[derive(Numeral, Fractional)]]
+[[internal]]
+pub typedef Float
+
+[[derive(Numeral, Fractional)]]
+[[internal]]
+pub typedef Double
+
+[[derive(Numeral, Fractional)]]
+[[internal]]
+pub typedef LongDouble

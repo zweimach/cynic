@@ -1,0 +1,2 @@
+[[internal]]
+pub class Error {}

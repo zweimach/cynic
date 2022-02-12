@@ -1,0 +1,6 @@
+module Control.Applicative exposing (..)
+
+import @.Prelude exposing (..)
+
+class Functor f <= Applicative (f : Type -> Type) where
+    pure : a -> f a

@@ -1,0 +1,6 @@
+module Control.Functor exposing (..)
+
+import @.Prelude exposing (..)
+
+class Functor (f : Type -> Type) where
+    map : (a -> b) -> f a -> f b

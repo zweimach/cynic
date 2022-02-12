@@ -1,0 +1,18 @@
+use cynic/prelude::*;
+use cynic/package;
+
+pub const build = package::Library {
+    .name = "skeptic",
+    .author = "Ananda Umamil <zweimach@zweimach.org>",
+    .sourceDir = "src",
+    .dependencies = {
+        package::Dependency {
+            .name = "cynic",
+            .path = package::builtin::cynic,
+        },
+    },
+    .modules = {
+        "prelude",
+        "package",
+    },
+};

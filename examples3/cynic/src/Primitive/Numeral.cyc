@@ -1,0 +1,59 @@
+module Primitive.Numeral hiding
+    ( Unsigned
+    , Signed
+    )
+
+#[internal]
+class Numeral a
+
+#[internal]
+class (Numeral a) <= Fractional a
+
+#[internal]
+class (Numeral a) <= Integral a
+
+#[internal]
+class (Integral a) <= Unsigned a
+
+#[internal]
+class (Integral a) <= Signed a
+
+#[derive(Numeral, Integral, Signed)]
+#[internal]
+typedef Int
+
+#[derive(Numeral, Integral, Signed)]
+#[internal]
+typedef Int8
+
+#[derive(Numeral, Integral, Signed)]
+#[internal]
+typedef Int16
+
+#[derive(Numeral, Integral, Signed)]
+#[internal]
+typedef Int32
+
+#[derive(Numeral, Integral, Signed)]
+#[internal]
+typedef Int64
+
+#[derive(Numeral, Integral, Unsigned)]
+#[internal]
+typedef UInt
+
+#[derive(Numeral, Integral, Unsigned)]
+#[internal]
+typedef UInt8
+
+#[derive(Numeral, Integral, Unsigned)]
+#[internal]
+typedef UInt16
+
+#[derive(Numeral, Integral, Unsigned)]
+#[internal]
+typedef UInt32
+
+#[derive(Numeral, Integral, Unsigned)]
+#[internal]
+typedef UInt64
