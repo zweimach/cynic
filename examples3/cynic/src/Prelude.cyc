@@ -1,0 +1,5 @@
+open module Prelude
+
+import @.Control.Functor exposing (Functor)
+import @.Data.Maybe exposing (Maybe)
+import @.Data.Result exposing (Result)

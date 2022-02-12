@@ -1,0 +1,7 @@
+use @/prelude::*
+
+pub union Result[E, T] with Error[E]
+    abstract Ok = T
+    abstract Err = E
+
+pub extend Result[E, T]

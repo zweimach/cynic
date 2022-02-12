@@ -1,0 +1,10 @@
+use @/prelude::*;
+
+pub union Result[Error E, T] {
+    abstract Ok = T,
+    abstract Err = E,
+}
+
+pub extend Result[E, T] {
+
+}

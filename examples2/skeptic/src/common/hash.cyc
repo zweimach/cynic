@@ -1,0 +1,6 @@
+use @/prelude::*;
+
+[[internal]]
+pub class Hash {
+    Int32 hash(&self);
+}

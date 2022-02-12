@@ -1,0 +1,20 @@
+include libc/stdlib
+
+[[extern(stdlib, "memset")]]
+Void memset(Void*, Void*, usize)
+
+[[extern(stdlib, "malloc")]]
+Void* malloc(ISize)
+
+[[internal]]
+pub class Allocator
+    pub T& alloc[T](&self, USize n)
+
+    pub Unit free[T](&self, T& mem)
+
+    pub T& realloc[T](&self, T& mem, USize n)
+
+    pub T& alloc[T](&self, USize n)
+
+pub struct CAllocator
+

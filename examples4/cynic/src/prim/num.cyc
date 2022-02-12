@@ -1,0 +1,70 @@
+[[internal]]
+pub class Numeral[T]
+
+[[internal]]
+pub class Fractional[Numeral T]
+
+[[internal]]
+pub class Integral[Numeral T]
+
+[[internal]]
+pub class Unsigned[Integral T]
+
+[[internal]]
+pub class Signed[Integral T]
+
+[[derive(Numeral, Integral, Signed)]]
+[[internal]]
+pub typedef Int
+
+[[derive(Numeral, Integral, Signed)]]
+[[internal]]
+pub typedef ISize
+
+[[derive(Numeral, Integral, Signed)]]
+[[internal]]
+pub typedef Int8
+
+[[derive(Numeral, Integral, Signed)]]
+[[internal]]
+pub typedef Int16
+
+[[derive(Numeral, Integral, Signed)]]
+[[internal]]
+pub typedef Int32
+
+[[derive(Numeral, Integral, Signed)]]
+[[internal]]
+pub typedef Int64
+
+[[derive(Numeral, Integral, Unsigned)]]
+[[internal]]
+pub typedef UInt
+
+[[derive(Numeral, Integral, Unsigned)]]
+[[internal]]
+pub typedef USize
+
+[[derive(Numeral, Integral, Unsigned)]]
+[[internal]]
+pub typedef UInt8
+
+[[derive(Numeral, Integral, Unsigned)]]
+[[internal]]
+pub typedef UInt16
+
+[[derive(Numeral, Integral, Unsigned)]]
+[[internal]]
+pub typedef UInt32
+
+[[derive(Numeral, Integral, Unsigned)]]
+[[internal]]
+pub typedef UInt64
+
+[[derive(Numeral, Fractional)]]
+[[internal]]
+pub typedef Float32
+
+[[derive(Numeral, Fractional)]]
+[[internal]]
+pub typedef Float64

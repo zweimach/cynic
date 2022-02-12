@@ -8,28 +8,27 @@
 
 #include "lexer.h"
 #include "token.h"
+#include "types.h"
 
-static void lexer_test(void** state)
+static Void lexer_test(Void** state)
 {
-    (void)state;
-
-    char const* const input = "=+(){},;";
+    Char const* const input = "=+(){},;";
     Token tests[] = {
-        {T_ASSIGN, "="},
-        {T_PLUS, "+"},
-        {T_LPAREN, "("},
-        {T_RPAREN, ")"},
-        {T_LBRACE, "{"},
-        {T_RBRACE, "}"},
-        {T_COMMA, ","},
-        {T_SEMICOLON, ";"},
-        {T_EOF, ""},
+        {TOKEN_ASSIGN, "="},
+        {TOKEN_PLUS, "+"},
+        {TOKEN_OPEN_PAREN, "("},
+        {TOKEN_CLOSE_PAREN, ")"},
+        {TOKEN_OPEN_CURLY, "{"},
+        {TOKEN_CLOSE_CURLY, "}"},
+        {TOKEN_COMMA, ","},
+        {TOKEN_SEMICOLON, ";"},
+        {TOKEN_EOF, "\0"},
     };
     Lexer* lexer = lexer_new(input);
 
-    for (unsigned i = 0; i <= strlen(input); i++) {
+    for (size_t i = 0; i <= strlen(input); i++) {
         Token* token = lexer_next_token(lexer);
-        assert_string_equal(token_type(token->type), token_type(tests[i].type));
+        assert_int_equal(token->kind, tests[i].kind);
         assert_string_equal(token->value, tests[i].value);
     }
     lexer_free(lexer);

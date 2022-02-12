@@ -1,0 +1,25 @@
+use @/prelude::*
+
+[[internal]]
+pub class Add[T]
+    fun add(&self, other: T&) T
+
+[[internal]]
+pub class Sub[T]
+    fun sub(&self, other: T&) T
+
+[[internal]]
+pub class Mult[T]
+    fun mult(&self, other: T&) T
+
+[[internal]]
+pub class Div[T]
+    fun div(&self, other: T&) T
+
+[[internal]]
+pub class Mod[T]
+    fun mod(&self, other: T&) T
+
+[[internal]]
+pub class Rem[T]
+    fun rem(&self, other: T&) T

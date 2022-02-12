@@ -1,0 +1,31 @@
+use @/prelude::*;
+
+[[internal]]
+pub class Add[T] {
+    T add(*self, T* other);
+}
+
+[[internal]]
+pub class Sub[T] {
+    T sub(*self, T* other);
+}
+
+[[internal]]
+pub class Mult[T] {
+    T mult(*self, T* other);
+}
+
+[[internal]]
+pub class Div[T] {
+    T div(*self, T* other);
+}
+
+[[internal]]
+pub class Mod[T] {
+    T mod(*self, T* other);
+}
+
+[[internal]]
+pub class Rem[T] {
+    T rem(*self, T* other);
+}

@@ -7,7 +7,8 @@ project('cynic',
 )
 
 cc = meson.get_compiler('c')
-dep_m = cc.find_library('m', required : false)
+m_dep = cc.find_library('m', required : false)
+uthash_dep = dependency('uthash')
 cmocka_dep = dependency('cmocka')
 
 cynic_lib = library('cynic',
@@ -24,7 +25,7 @@ cynic_dep = declare_dependency(
 
 executable('cynic',
     sources: ['src/main.c'],
-    dependencies: [cynic_dep],
+    dependencies: [cynic_dep, uthash_dep],
 )
 
 test_files = [

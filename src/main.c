@@ -3,27 +3,28 @@
 
 #include "lexer.h"
 #include "token.h"
+#include "types.h"
 
-int main(int argc, char** argv)
+Int main(Int argc, Char** argv)
 {
-    char const* const input = "=+(){},;";
+    Char const* const input = "=+(){},;";
     Token tests[] = {
-        {T_ASSIGN, "="},
-        {T_PLUS, "+"},
-        {T_LPAREN, "("},
-        {T_RPAREN, ")"},
-        {T_LBRACE, "{"},
-        {T_RBRACE, "}"},
-        {T_COMMA, ","},
-        {T_SEMICOLON, ";"},
-        {T_EOF, ""},
+        {TOKEN_ASSIGN, "="},
+        {TOKEN_PLUS, "+"},
+        {TOKEN_OPEN_PAREN, "("},
+        {TOKEN_CLOSE_PAREN, ")"},
+        {TOKEN_OPEN_CURLY, "{"},
+        {TOKEN_CLOSE_CURLY, "}"},
+        {TOKEN_COMMA, ","},
+        {TOKEN_SEMICOLON, ";"},
+        {TOKEN_EOF, "\0"},
     };
 
     Lexer* lexer = lexer_new(input);
 
-    for (unsigned i = 0; i <= strlen(input); i++) {
+    for (USize i = 0; i <= strlen(input); i++) {
         Token* token = lexer_next_token(lexer);
-        printf("%s %s\n", token_type(token->type), token_type(tests[i].type));
+        printf("%u %u\n", token->kind, tests[i].kind);
         printf("%s %s\n", token->value, tests[i].value);
     }
 

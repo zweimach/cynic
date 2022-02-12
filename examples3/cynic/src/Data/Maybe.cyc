@@ -1,0 +1,26 @@
+module Data.Maybe exposing (..)
+
+import @.Prelude exposing (..)
+
+union Maybe a
+    = Just a
+    | Nothing
+
+newtype Just a = Just a
+
+newtype Nothing = Nothing
+
+withDefault : a -> Maybe a -> a
+withDefault x y =
+    case y of
+        Nothing -> x
+        Maybe z -> z
+
+instance Functor Maybe where
+    map = map
+
+map : (a -> b) -> Maybe a -> Maybe b
+map f x =
+    case x of
+        Nothing -> Nothing
+        Maybe y -> Just << f y

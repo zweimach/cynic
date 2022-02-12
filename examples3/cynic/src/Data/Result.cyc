@@ -1,0 +1,20 @@
+module Data.Result exposing (..)
+
+import @.Prelude exposing (..)
+
+union Result e v
+    = Ok v
+    | Err e
+
+newtype Ok v = Ok v
+
+newtype Err e = Err e
+
+instance Functor (Result e) where
+    map = map
+
+map : (a -> b) -> Maybe e a -> Maybe e b
+map f x =
+    case x of
+        Err y -> Err y
+        Ok y -> Ok << f y

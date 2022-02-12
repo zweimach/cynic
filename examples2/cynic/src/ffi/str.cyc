@@ -1,0 +1,5 @@
+use @/prim/str::{Text};
+
+[[derive(Text)]]
+[[internal]]
+pub abstract CString;

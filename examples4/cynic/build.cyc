@@ -1,0 +1,12 @@
+use cynic/prelude::*
+use cynic/package
+
+pub build ::= package::Library{
+    .name = "cynic",
+    .author = "Ananda Umamil <zweimach@zweimach.org>",
+    .sourceDir = "src",
+    .modules = {
+        "prelude",
+        "package",
+    },
+}

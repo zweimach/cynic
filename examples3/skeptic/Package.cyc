@@ -1,0 +1,16 @@
+module Package exposing (package)
+
+import Cynic.Package exposing (Package)
+
+package : Package
+package =
+    Package.Library
+        { name = "Skeptic"
+        , author = "Ananda Umamil <zweimach@zweimach.org>"
+        , sourceDir = "src"
+        , modules =
+            [ "Prelude"
+            , "Data.Array"
+            , "Memory.Allocator"
+            ]
+        }

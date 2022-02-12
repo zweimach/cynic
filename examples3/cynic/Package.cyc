@@ -1,0 +1,17 @@
+module Package exposing (package)
+
+import Cynic.Package exposing (Package)
+
+package : Package
+package =
+    Package.Library
+        { name = "Cynic"
+        , author = "Ananda Umamil <zweimach@zweimach.org>"
+        , sourceDir = "src"
+        , modules =
+            [ "Prelude"
+            , "Package"
+            , "Data.Maybe"
+            , "Data.Result"
+            ]
+        }

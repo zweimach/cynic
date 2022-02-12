@@ -1,0 +1,59 @@
+use @/prelude::*
+
+[[internal]]
+pub class PartialEq[T]
+    fun equal(&self, other: T&) Bool
+
+    fun notEqual(&self, other: T&) Bool
+        !self.equal(other)
+
+[[internal]]
+pub class Eq[T] with PartialEq[T] {}
+
+[[internal]]
+pub class PartialOrd[T] with PartialEq[T]
+    Maybe[Ordering] partialCompare(&self, other: T&)
+
+    fun less(&self, other: T&) Bool
+        switch self.partialCompare(other)
+            Less => True,
+            _ => False,
+
+    fun lessEqual(&self, other: T&) Bool
+        switch self.partialCompare(other)
+            Less => True,
+            Equal => True,
+            _ => False,
+
+    fun greater(&self, other: T&) Bool
+        switch self.partialCompare(other)
+            Greater => True,
+            _ => False,
+
+    fun greaterEqual(&self, other: T&) Bool
+        switch self.partialCompare(other)
+            Equal => True,
+            Greater => True,
+            _ => False,
+
+[[internal]]
+pub class Ord[T] with PartialOrd[T], Eq[T]
+    fun compare(&self, other: T&) Ordering
+
+    fun max(self, other: T) T
+        if self |> PartialOrd::greater(_, other)
+            self
+        else
+            other
+
+    fun min(self, other: T) T
+        if self |> PartialOrd::less(_, other)
+            self
+        else
+            other
+
+[[internal]]
+pub enum Ordering
+    Less = -1,
+    Equal = 0,
+    Greater = 1,

@@ -1,0 +1,68 @@
+use @/prelude::*;
+
+[[internal]]
+pub class PartialEq[T] {
+    Bool equal(*self, T* other);
+
+    Bool notEqual(*self, T* other) {
+        return !self.equal(other);
+    }
+}
+
+[[internal]]
+pub class Eq[T] with PartialEq[T] {};
+
+[[internal]]
+pub class PartialOrd[T] with PartialEq[T] {
+    Maybe[Ordering] partialCompare(*self, T* other);
+
+    Bool less(*self, T* other) {
+        return switch self.partialCompare(other) {
+            Less => True,
+            _ => False,
+        };
+    }
+
+    Bool lessEqual(*self, T* other) {
+        return switch self.partialCompare(other) {
+            Less => True,
+            Equal => True,
+            _ => False,
+        };
+    }
+
+    Bool greater(*self, T* other) {
+        return switch self.partialCompare(other) {
+            Greater => True,
+            _ => False,
+        };
+    }
+
+    Bool greaterEqual(*self, T* other) {
+        return switch self.partialCompare(other) {
+            Equal => True,
+            Greater => True,
+            _ => False,
+        };
+    }
+}
+
+[[internal]]
+pub class Ord[T] with PartialOrd[T], Eq[T] {
+    Ordering compare(*self, T* other);
+
+    T max(self, T other) {
+        return if self.greater(other) { self } else { other };
+    }
+
+    T min(self, T other) {
+        return if self.less(other) { self } else { other };
+    }
+}
+
+[[internal]]
+pub enum Ordering {
+    Less = -1,
+    Equal = 0,
+    Greater = 1,
+}

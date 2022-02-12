@@ -1,0 +1,17 @@
+use @/prelude::*
+
+[[internal]]
+pub class BitAnd[T]
+    fun bitAnd(&self, other: T&) T
+
+[[internal]]
+pub class BitOr[T]
+    fun bitOr(&self, other: T&) T
+
+[[internal]]
+pub class BitXor[T]
+    fun bitXor(&self, other: T&) T
+
+[[internal]]
+pub class BitNot[T]
+    fun bitNot(&self, other: T&) T

@@ -1,0 +1,10 @@
+use @/prelude::*;
+
+pub union Maybe[T] {
+    abstract Just = T,
+    abstract None,
+}
+
+pub extend Maybe[T] {
+
+}
