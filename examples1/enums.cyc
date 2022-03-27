@@ -1,0 +1,11 @@
+use cynic/prelude::*
+use cynic/error::{AnyError, unreachable}
+use skeptic/prelude::*
+use skeptic/testing::{expect}
+
+enum Type {
+    Ok,
+    NotOk,
+}
+
+

@@ -1,6 +1,6 @@
 project('cynic',
     'c',
-    version : '0.0.0',
+    version : '0.0.1',
     license: 'MIT',
     subproject_dir: 'third-party',
     default_options: ['c_std=c17', 'default_library=static'],

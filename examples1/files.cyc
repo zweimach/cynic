@@ -1,0 +1,28 @@
+use skeptic/prelude::*;
+use skeptic/error::{AnyError, unreachable};
+use skeptic/fs;
+use skeptic/fs::{File};
+use skeptic/io;
+use skeptic/mem::{Allocator, cAllocator};
+use skeptic/os;
+
+pub fn main() {
+    implicit Allocator = cAllocator;
+
+    const homeDir = os::homeDir() |> handleErr(_);
+    const filePath = fs::path::join(_&_, { homeDir, ".bashrc"});
+    const file = fs.openFile(filePath, { .read = True }) |> handleErr(_);
+    defer file->close();
+    const result = file->readAll(_&_, Nothing);
+    io::println("{}", result) |> handleErr(_);
+}
+
+fn handleErr[E, T](v: Result[E, T]) T {
+    const v_ = switch v {
+        Ok(v) => return v;
+        Err(e) => io::println("{}", err);
+    };
+    if const Err(e) = v_ {
+        os::panic(e);
+    }
+}

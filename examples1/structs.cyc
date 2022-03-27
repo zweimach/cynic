@@ -1,67 +1,69 @@
-use skeptic/prelude;
-use skeptic/testing.{expect};
+use cynic/prelude::*
+use cynic/error::{AnyError}
+use skeptic/prelude::*
+use skeptic/testing::{expect}
 
 // Declare a struct.
 // Zig gives no guarantees about the order of fields and the size of
 // the struct but the fields are guaranteed to be ABI-aligned.
 struct Point {
-    Float32 x,
-    Float32 y,
+    x: Float32,
+    y: Float32,
 }
 
 // Maybe we want to pass it to OpenGL so we want to be particular about
 // how the bytes are arranged.
 [[packed]]
 struct Point2 {
-    Float32 x,
-    Float32 y,
+    x: Float32,
+    y: Float32,
 }
 
 // Declare an instance of a struct.
-const p = Point {
+const p = Point{
     .x = 0.12,
     .y = 0.34,
-};
+}
 
 // Maybe we're not ready to fill out some of the fields.
-var p2 = Point {
+var p2 = Point{
     .x = 0.12,
     .y = undefined,
-};
+}
 
 // Structs can have methods
 // Struct methods are not special, they are only namespaced
 // functions that you can call with dot syntax.
 struct Vec3 {
-    Float32 x,
-    Float32 y,
-    Float32 z,
+    x: Float32,
+    y: Float32,
+    z: Float32,
 }
 
 extend Vec3 {
-    pub Self new(Float32 x, Float32 y, Float32 z) {
-        return Self {
+    pub fun new(x: Float32, y: Float32, z: Float32) -> Self {
+        Self{
             .x = x,
             .y = y,
             .z = z,
-        };
+        }
     }
 
-    pub Float32 dot(Self this, Self other) {
-        return self.x * other.x + self.y * other.y + self.z * other.z;
+    pub fun dot(self: Self, other: Self) -> Float32 {
+        self.x * other.x + self.y * other.y + self.z * other.z
     }
 }
 
 [[test("dot product")]]
-Unit testDotProduct() {
-    const v1 = Vec3::new(1.0, 0.0, 0.0);
-    const v2 = Vec3::new(0.0, 1.0, 0.0);
-    expect(v1.dot(v2), 0.0);
+fun testDotProduct() AnyError!Unit {
+    const v1 = Vec3::new(1.0, 0.0, 0.0)
+    const v2 = Vec3::new(0.0, 1.0, 0.0)
+    v1.dot(v2) |> expect(_, 0.0).?
 
     // Other than being available to call with dot syntax, struct methods are
     // not special. You can reference them as any other declaration inside
     // the struct:
-    expect(Vec3::dot(v1, v2), 0.0);
+    Vec3::dot(v1, v2) |> expect(_, 0.0).?
 }
 
 // Structs can have declarations.
@@ -73,12 +75,12 @@ extend Empty {
 }
 
 [[test("struct namespaced variable")]]
-Unit testStructNamespacedVariable() {
-    expect(Empty::PI, 3.14);
-    expect(sizeOf(Empty), 0);
+fun testStructNamespacedVariable() AnyError!Unit {
+    expect(Empty::PI, 3.14).?
+    expect(sizeOf(Empty), 0).?
 
     // you can still instantiate an empty struct
-    const doesNothing = Empty {};
+    const doesNothing = Empty{}
 
     _ = doesNothing;
 }

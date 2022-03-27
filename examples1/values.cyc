@@ -1,36 +1,38 @@
-use skeptic/prelude;
-use skeptic/debug::{assert, print};
-use skeptic/error::{AnyError}
+use cynic/prelude::*
+use cynic/testing::{assert}
+use cynic/error::{self, AnyError}
+use skeptic/prelude::*
+use skeptic/debug::{print}
 
-Unit main() {
+fun main() {
     // integers
-    Int32 const onePlusOne = 1 + 1
-    print("1 + 1 = {}\n", onePlusOne)
+    const onePlusOne: Int32 = 1 + 1
+    print("1 + 1 = {}\n", {onePlusOne})
 
     // floats
-    Float32 const sevenDivThree = 7.0 / 3.0;
-    print("7.0 / 3.0 = {}\n", sevenDivThree);
+    const sevenDivThree: Float32 = 7.0 / 3.0
+    print("7.0 / 3.0 = {}\n", {sevenDivThree})
 
     // boolean
-    print("{}\n{}\n{}\n", True && False, True || False, !True);
+    print("{}\n{}\n{}\n", {True && False, True || False, !True})
 
     // optional
-    Maybe<String> optionalValue = Nothing;
-    assert(optionalValue == Nothing);
+    var optionalValue: Maybe<String> = Nothing
+    assert(optionalValue == Nothing)
 
-    print("\noptional 1\ntype: {s}\nvalue: {s}\n", typeOf(optionalValue), optionalValue);
+    print("\noptional 1\ntype: {s}\nvalue: {s}\n", {typeOf(optionalValue), optionalValue})
 
-    optionalValue = Just("hi");
-    assert(optionalValue != Nothing);
+    optionalValue = "hi" |> Just
+    assert(optionalValue != Nothing)
 
-    print("\noptional 2\ntype: {s}\nvalue: {s}\n", typeOf(optionalValue), optionalValue);
+    print("\noptional 2\ntype: {s}\nvalue: {s}\n", {typeOf(optionalValue), optionalValue})
 
     // error union
-    Result<AnyError, Int32> numberOrError = AnyError::ArgNotFound;
+    var numberOrError: Result<AnyError, Int32> = error::ArgNotFound
 
-    print("\nerror union 1\ntype: {s}\nvalue: {s}\n", typeOf(numberOrError), numberOrError);
+    print("\nerror union 1\ntype: {s}\nvalue: {s}\n", {typeOf(numberOrError), numberOrError})
 
-    numberOrError = Ok(1234);
+    numberOrError = 1234 |> Ok
 
-    print("\nerror union 2\ntype: {s}\nvalue: {s}\n", typeOf(numberOrError), numberOrError);
+    print("\nerror union 2\ntype: {s}\nvalue: {s}\n", {typeOf(numberOrError), numberOrError})
 }

@@ -1,0 +1,25 @@
+use cynic/prelude::*
+use cynic/error::{AnyError, unreachable}
+use skeptic/prelude::*
+use skeptic/testing::{expect}
+
+union ComplexType {
+    abstract Ok = UInt8,
+    abstract NotOk = Unit,
+}
+
+[[test("switch on tagged union")]]
+fun testSwitchOnTaggedUnion() AnyError!Unit {
+    const c = ComplexType::Ok(42)
+    expect(c == ComplexType::Ok).?
+
+    switch c {
+        ComplexType::Ok(value) => expect(value == 42).?,
+        ComplexType::NotOk => unreachable,
+    }
+}
+
+[[test("get tag type")]]
+fun testGetTagType() AnyError!Unit {
+    ???
+}
