@@ -1,0 +1,9 @@
+use skeptic/prelude::*;
+use skeptic/fs;
+use skeptic/io;
+use skeptic/mem::{@, Allocator};
+use skeptic/os;
+
+pub fn main() {
+}
+

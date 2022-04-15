@@ -1,0 +1,64 @@
+use skeptic/prelude::*;
+use skeptic/fs;
+use skeptic/io;
+use skeptic/mem::{@, Allocator};
+use skeptic/os;
+
+pub fn main() {
+    var shape: Box[Shape];
+    shape = Box::new(Square::new(12.5));
+    io::print("Square: area {:.2}, perimeter {:.2}\n", shape.area(), shape.perimeter());
+    io::print("Total {:.2}\n", shape |> getTotal(_));
+    shape = Box::new(Circle::new(8.5));
+    io::print("Circle: area {:.2}, perimeter {:.2}\n", shape.area(), shape.perimeter());
+    io::print("Total {:.2}\n", shape |> getTotal(_));
+}
+
+fn getTotal(s: Shape) Float64 {
+    return s.area() + s.perimeter();
+}
+
+class Shape {
+    fn area(s: Ref[Self]) Float64;
+    fn perimeter(s: Ref[Self]) Float64;
+}
+
+struct Square {
+    sides: Float64,
+}
+
+extend Square {
+    fn new(sides: Float64) Self {
+        return Self{.sides = sides};
+    }
+}
+
+extend Square with Shape {
+    fn area(s: Ref[Self]) Float64 {
+        return s.sides * s.sides;
+    }
+
+    fn perimeter(s: Ref[Self]) Float64 {
+        return s.sides * 4;
+    }
+}
+
+struct Circle {
+    radius: Float64,
+}
+
+extend Circle {
+    fn new(radius: Float64) Self {
+        return Self{.radius = radius};
+    }
+}
+
+extend Circle with Shape {
+    fn area(s: Ref[Self]) Float64 {
+        return s.radius * s.radius * Float64::PI;
+    }
+
+    fn perimeter(s: Ref[Self]) Float64 {
+        return s.radius * 2 * Float64::PI;
+    }
+}
