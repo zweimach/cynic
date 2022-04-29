@@ -1,0 +1,18 @@
+use cyc::prelude::*;
+use cyc::io;
+
+fn main() {
+    let t = LinkedList::new(12);
+    io::fmt::print("{}\n", { t.value });
+}
+
+struct LinkedList[T] {
+    value: T,
+    next: Just[T],
+}
+
+extend LinkedList[T] {
+    fn new(value: T) Self {
+        return Self { .value = value, .next = Nothing };
+    }
+}

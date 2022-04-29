@@ -1,0 +1,20 @@
+use skeptic/prelude::*;
+use skeptic/data::{Buffer};
+use skeptic/fs;
+use skeptic/io;
+use skeptic/mem::{@, Allocator};
+use skeptic/os;
+use unix/net::{@};
+use unix/net/socket::{@};
+
+const MAXRCVLEN = 500;
+const PORTNUM = 2300;
+
+pub fn main() {
+    implicit Allocator = mem::cAllocator;
+
+    var buffer: CString = "";
+    var len = 0;
+    var dest = net::Address::new();
+    var mysocket = socket::Socket::from();
+}

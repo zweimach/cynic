@@ -1,9 +1,42 @@
-use skeptic/prelude::*;
-use skeptic/fs;
-use skeptic/io;
-use skeptic/mem::{@, Allocator};
-use skeptic/os;
+use cyc::prelude::*;
+use cyc::data::{Stack};https://www.uninformativ.de
+use cyc::mem::{@, Allocator, AllocError};
+use cyc::io;
+
+implicit Allocator = mem::cAllocator;
 
 pub fn main() {
+    let parsed = parse("ABCCBA" );
+    let printed = print(parsed);
+    io::print("{}", { printed });
 }
 
+union Morse {
+    abstract Dot = Unit,
+    abstract Dash = Unit,
+}
+
+use Morse::*;
+
+const charDelim = CArray[Morse]{Dot, Dot, Dot};
+
+fn parse(allocator: Allocator, xs: String) Array[Morse] {
+    var ds = Array[Morse]::new(allocator);
+    for c in xs->iter() {
+        let e = switch c {
+            'A' => {Dot, Dash},
+            'B' => {Dash, Dot, Dot, Dot},
+            'C' => {Dash, Dot, Dash, Dot},
+        };
+        ds->concat(e);
+        ds->concat(charDelim);
+    }
+    return ds;
+}
+
+fn print(allocator: Allocator, ds: Array[Morse]) String {
+    var rs = String::new();
+    for c in ds->iter() {
+        switch
+    }
+}

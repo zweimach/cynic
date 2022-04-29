@@ -1,0 +1,35 @@
+use cyc::prelude::*;
+use cyc::data::{Stack};
+use cyc::mem::{@, Allocator, AllocError};
+use cyc::io;
+
+implicit Allocator = mem::cAllocator;
+
+pub fn main() {
+    if isValid("{[([])]}").! {
+        io::fmt::print("true\n", {}).!;
+    } else {
+        io::fmt::print("false\n", {}).!;
+    }
+}
+
+fn isValid(allocator: Allocator, xs: String) Result[AllocError, Bool] {
+    var s = Stack[Char]::new().?;
+    defer s->delete();
+    for c in xs->iter() {
+        switch s->last() {
+            Just{n} if n.* == f(c.*) => s->pop,
+            Nothing => s->push(c.*).?,
+        }
+    }
+    return s->isEmpty() |> Ok{};
+}
+
+fn f(c: Char) Char {
+    return switch c {
+        '}' => '{',
+        ']' => '[',
+        ')' => '(',
+        default => '\0',
+    };
+}

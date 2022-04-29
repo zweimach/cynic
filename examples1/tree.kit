@@ -1,0 +1,13 @@
+function main() {
+    const t = LinkedList.new(12);
+    printf("%d\n", t.value);
+}
+
+struct LinkedList[T] {
+    var value: T;
+    var next: Option[T];
+
+    static function new(value: T): Self {
+        return struct Self { value: value, next: None };
+    }
+}

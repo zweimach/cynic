@@ -1,0 +1,36 @@
+function main() {
+    if isValid("{[([])]}") {
+        printf("true\n");
+    } else {
+        printf("false\n");
+    }
+}
+
+function isValid(xs: CString): Bool {
+    var s = Vector[Int32].new(xs.length / 2);
+    // defer s.free();
+    for i in xs {
+        match s.last {
+            None => s.push(i);
+            Some(c) => {
+                if i == f(c) {
+                    s.pop();
+                } else {
+                    s.push(i);
+                }
+            }
+        }
+    }
+    const result = s.length == 0;
+    s.free();
+    return result;
+}
+
+function f(c: Char): Char {
+    match c {
+        c'{' => return c'}';
+        c'[' => return c']';
+        c'(' => return c')';
+        default => return c'\0';
+    }
+}

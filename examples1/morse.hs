@@ -2,15 +2,19 @@
 
 module Main (main) where
 
-import Data.Foldable
+import Data.Foldable (Foldable (..))
 import Data.Sequence (Seq, (><), (|>))
 import qualified Data.Sequence as Seq
 import Data.Text (Text)
 import qualified Data.Text as Text
+import qualified Data.Text.IO as Text
 import Prelude hiding (print)
 
 main :: IO ()
-main = putStrLn ""
+main = do
+    let parsed = parse "ABCCBA"
+    let printed = print parsed
+    Text.putStrLn printed
 
 data Morse = Dot | Dash
     deriving (Show, Eq)
